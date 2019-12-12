@@ -4,7 +4,7 @@ nodejs-ex using an OpenShift build pipeline.
 To do this, run:
 
 ```bash
-# create the nodejs example as usual
+# create silly as usual
 oc new-app https://github.com/jeremy-003/silly
 
 # now create the pipeline build controller from the openshift/pipeline
