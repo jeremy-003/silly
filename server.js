@@ -73,6 +73,10 @@ var initDb = function(callback) {
   });
 };
 
+// body-parser handles parsing of request bodies
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+
 app.get('/', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
