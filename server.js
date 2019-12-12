@@ -97,6 +97,7 @@ function isValidPartialMySite(inMySite) {
   if (inMySite.hasOwnProperty('brand')) { return true; }
   if (inMySite.hasOwnProperty('userId')) { return true; }
   return false;
+}
 
 ///////////////////////
 ///////Endpoints///////
