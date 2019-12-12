@@ -77,6 +77,31 @@ var initDb = function(callback) {
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
+// Validators
+// N.B. loginUrl is not a required field
+function isValidFullMySite(inMySite) {
+  if (!inMySite.hasOwnProperty('siteUrl')) { return false; }
+  if (!inMySite.hasOwnProperty('cmsType')) { return false; }
+  if (!inMySite.hasOwnProperty('dataSource')) { return false; }
+  if (!inMySite.hasOwnProperty('dataTimestamp')) { return false; }
+  if (!inMySite.hasOwnProperty('brand')) { return false; }
+  if (!inMySite.hasOwnProperty('userId')) { return false; }
+  return true;
+}
+
+function isValidPartialMySite(inMySite) {
+  if (inMySite.hasOwnProperty('siteUrl')) { return true; }
+  if (inMySite.hasOwnProperty('cmsType')) { return true; }
+  if (inMySite.hasOwnProperty('dataSource')) { return true; }
+  if (inMySite.hasOwnProperty('dataTimestamp')) { return true; }
+  if (inMySite.hasOwnProperty('brand')) { return true; }
+  if (inMySite.hasOwnProperty('userId')) { return true; }
+  return false;
+
+///////////////////////
+///////Endpoints///////
+///////////////////////
+
 app.get('/', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
