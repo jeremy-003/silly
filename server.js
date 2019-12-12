@@ -119,6 +119,100 @@ initDb(function(err){
   console.log('Error connecting to Mongo. Message:\n'+err);
 });
 
+// New code from sherlock into the example
+//
+// POST - MySite
+app.post('/mySites', (req, res) => {
+  if (!isValidFullMySite(req.body)) {
+      res.status(400).send();
+      return;
+  }
+  db.collection('mySite').insertOne(req.body, (err, results) => {
+      if (err) {
+          res.status(500).json(err.message);
+      } else {
+          res.json(results);
+      }
+})});
+
+// GET (list) - MySite
+app.get('/mySites', (req, res) => {
+  db.collection('mySite').find({}).toArray((err, results) => {
+      if (err) {
+          res.json(err.message);
+      } else {
+          res.json(results);
+      }
+})});
+
+// GET (detail) - MySite
+app.get('/mySites/:siteUrl', (req, res) => {
+  let filter = {'siteUrl': req.params.siteUrl};
+  db.collection('mySite').findOne(filter, (err, results) => {
+      if (err) {
+          res.json(err.message);
+      } else {
+          res.json(results);
+      }
+})});
+
+// PUT - MySite
+app.put('/mySites/:siteUrl', (req, res) => {
+  if (!isValidPartialMySite(req)) {
+      res.status(400).send();
+  }
+  let filter = {'siteUrl': req.params.siteUrl};
+  let update = {$set: req.body};
+  db.collection('mySite').updateOne(filter, update, (err, results) => {
+      if (err) {
+          res.status(500).json(err.message);
+      } else {
+          res.json(results);
+      }
+})});
+
+// DELETE - MySite
+app.delete('/mySites/:siteUrl', (req, res) => {
+  let filter = {"siteUrl": req.params.siteUrl};
+  db.collection('mySite').deleteOne(filter, (err, results) => {
+      if (err) {
+          res.status(500).json(err.message);
+      } else {
+          res.json(results);
+      }
+})});
+
+// MySites By UserId + Brand
+// GET (list)
+app.get('/mySitesByUser/:brand/:userId', (req, res) => {
+  let filter = {
+      brand: req.params.brand,
+      userId: req.params.userId
+  };
+  db.collection('mySite').find(filter).toArray((err, results) => {
+      if (err) {
+          res.status(500).json(err.message);
+      } else {
+          res.json(results);
+      }
+})});
+
+// DELETE
+app.delete('/mySitesByUser/:brand/:userId', (req, res) => {
+  let filter = {
+      brand: req.params.brand,
+      userId: req.params.userId
+  };
+  db.collection('mySite').deleteMany(filter, (err, results) => {
+      if (err) {
+          res.status(500).json(err.message);
+      } else {
+          res.json(results);
+      }
+})});
+//
+//
+
 app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
 
