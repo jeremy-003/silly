@@ -104,7 +104,9 @@ function isValidPartialMySite(inMySite) {
 ///////////////////////
 
 app.get('/', function (req, res) {
-
+  // try to initialize the db on every request if it's not already
+  // initialized.
+  res.status(200);
 });
 
 // error handling
