@@ -21,18 +21,19 @@ if (mongoURL == null) {
     mongoUser = process.env[mongoServiceName + '_USER'];
 
   // If using env vars from secret from service binding  
-  } else if (process.env.database_name) {
-    mongoDatabase = process.env.database_name;
-    mongoPassword = process.env.password;
-    mongoUser = process.env.username;
-    var mongoUriParts = process.env.uri && process.env.uri.split("//");
-    if (mongoUriParts.length == 2) {
-      mongoUriParts = mongoUriParts[1].split(":");
-      if (mongoUriParts && mongoUriParts.length == 2) {
-        mongoHost = mongoUriParts[0];
-        mongoPort = mongoUriParts[1];
-      }
-    }
+  // Commented out for testing
+  // } else if (process.env.database_name) {
+  //   mongoDatabase = process.env.database_name;
+  //   mongoPassword = process.env.password;
+  //   mongoUser = process.env.username;
+  //   var mongoUriParts = process.env.uri && process.env.uri.split("//");
+  //   if (mongoUriParts.length == 2) {
+  //     mongoUriParts = mongoUriParts[1].split(":");
+  //     if (mongoUriParts && mongoUriParts.length == 2) {
+  //       mongoHost = mongoUriParts[0];
+  //       mongoPort = mongoUriParts[1];
+  //     }
+  //   }
   }
 
   if (mongoHost && mongoPort && mongoDatabase) {
