@@ -10,14 +10,11 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     mongoURLLabel = "";
 
 if (mongoURL == null) {
-  var mongoHost, mongoPort, mongoDatabase, mongoPassword, mongoUser;
-  
+
   mongoDatabase = process.env.database_name;
   mongoPassword = process.env.password;
   mongoUser = process.env.username;
-
   var mongoUriParts = process.env.uri && process.env.uri.split("//");
-  
   if (mongoUriParts.length == 2) {
     mongoUriParts = mongoUriParts[1].split(":");
     if (mongoUriParts && mongoUriParts.length == 2) {
@@ -25,6 +22,7 @@ if (mongoURL == null) {
       mongoPort = mongoUriParts[1];
     }
   }
+  
 
   if (mongoHost && mongoPort && mongoDatabase) {
     mongoURLLabel = mongoURL = 'mongodb://';
