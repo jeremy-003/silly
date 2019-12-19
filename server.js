@@ -47,12 +47,13 @@ if (mongoURL == null) {
     mongoURL += mongoHost + ':' +  mongoPort + '/' + mongoDatabase;
   }
 }
-if (mongoURLLabel == "") {
-  ip = '127.0.0.1';
-  port = 3000;
-  mongoURLLabel = mongoURL = 'mongodb://localhost:27017/sampledb';
-  mongoDatabase = 'sherlock';
-}
+// Commenting this out for testing which conditional above Openshift uses
+// if (mongoURLLabel == "") {
+//   ip = '127.0.0.1';
+//   port = 3000;
+//   mongoURLLabel = mongoURL = 'mongodb://localhost:27017/sampledb';
+//   mongoDatabase = 'sherlock';
+// }
 var db = null,
     dbDetails = new Object();
 
