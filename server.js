@@ -45,6 +45,8 @@ if (mongoURL == null) {
     // Provide UI label that excludes user id and pw
     mongoURLLabel += mongoHost + ':' + mongoPort + '/' + mongoDatabase;
     mongoURL += mongoHost + ':' +  mongoPort + '/' + mongoDatabase;
+    console.log(`URL Label: ${mongoURLLabel}`);
+    console.log(`URL: ${mongoURL}`);
   }
 }
 // Commenting this out for testing which conditional above Openshift uses
