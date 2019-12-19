@@ -54,13 +54,15 @@ if (mongoURL == null) {
     console.log(`URL in last conditional: ${mongoURL}`);
   }
 }
-// Commenting this out for testing which conditional above Openshift uses
-// if (mongoURLLabel == "") {
-//   ip = '127.0.0.1';
-//   port = 3000;
-//   mongoURLLabel = mongoURL = 'mongodb://localhost:27017/sampledb';
-//   mongoDatabase = 'sherlock';
-// }
+
+if (mongoURL === undefined) {
+  console.log(`made it into the localhost conditional with the URL as: ${mongoURL}`);
+  ip = '127.0.0.1';
+  port = 3000;
+  mongoURLLabel = mongoURL = 'mongodb://localhost:27017/sampledb';
+  mongoDatabase = 'sherlock';
+}
+
 var db = null,
     dbDetails = new Object();
 
