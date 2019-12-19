@@ -1,4 +1,4 @@
-//  OpenShift sample Node application
+// Dependencies
 var express = require('express'),
     app     = express();
     
@@ -11,7 +11,7 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
 
 if (mongoURL == null) {
   var mongoHost, mongoPort, mongoDatabase, mongoPassword, mongoUser;
-  // If using plane old env vars via service discovery
+  // Using env vars via service discovery for the Mongo database information
   if (process.env.DATABASE_SERVICE_NAME) {
     var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase();
     mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'];
@@ -32,12 +32,11 @@ if (mongoURL == null) {
   }
 }
 
+// This checks to see if mongoURL is still undefined so that we know to use the localhost information
 if (mongoURL === undefined) {
-  console.log(`made it into the localhost conditional with the URL as: ${mongoURL}`);
-  ip = '127.0.0.1';
+  ip = '127.0.0.1'; // used IP instead of localhost because localhost did not work right on my local machine.
   port = 3000;
   mongoURLLabel = mongoURL = 'mongodb://localhost:27017/sampledb';
-  mongoDatabase = 'sherlock';
 }
 
 var db = null,
@@ -207,4 +206,4 @@ app.delete('/mySitesByUser/:brand/:userId', (req, res) => {
 app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
 
-module.exports = app ;
+// module.exports = app ;
