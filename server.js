@@ -19,11 +19,9 @@ if (mongoURL == null) {
     mongoDatabase = process.env[mongoServiceName + '_DATABASE'];
     mongoPassword = process.env[mongoServiceName + '_PASSWORD'];
     mongoUser = process.env[mongoServiceName + '_USER'];
-    console.log('Using plain old env vars via service discovery')
 
   // If using env vars from secret from service binding  
   } else if (process.env.database_name) {
-    console.log('using env vars from secrets')
     mongoDatabase = process.env.database_name;
     mongoPassword = process.env.password;
     mongoUser = process.env.username;
@@ -48,13 +46,13 @@ if (mongoURL == null) {
   }
 }
 
-// if (mongoURL === undefined) {
-//   console.log(`made it into the localhost conditional with the URL as: ${mongoURL}`);
-//   ip = '127.0.0.1';
-//   port = 3000;
-//   mongoURLLabel = mongoURL = 'mongodb://localhost:27017/sampledb';
-//   mongoDatabase = 'sherlock';
-// }
+if (mongoURL === undefined) {
+  console.log(`made it into the localhost conditional with the URL as: ${mongoURL}`);
+  ip = '127.0.0.1';
+  port = 3000;
+  mongoURLLabel = mongoURL = 'mongodb://localhost:27017/sampledb';
+  mongoDatabase = 'sherlock';
+}
 
 var db = null,
     dbDetails = new Object();
