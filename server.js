@@ -2,7 +2,8 @@
 var express = require('express'),
     app     = express();
     
-//Object.assign=require('object-assign')
+// Not sure that this is need as the app seems to work without it
+// Object.assign=require('object-assign')
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
@@ -12,7 +13,7 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
 if (mongoURL == null) {
   var mongoHost, mongoPort, mongoDatabase, mongoPassword, mongoUser;
   // Using env vars via service discovery for the Mongo database information
-  console.log(`Service Name from env var: ${process.env.DATABASE_SERVICE_NAME}`)
+  console.log(`env var: ${process.env}`)
   if (process.env.DATABASE_SERVICE_NAME) {
     var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase();
     mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'];
@@ -34,7 +35,7 @@ if (mongoURL == null) {
 }
 
 // This checks to see if mongoURL is still undefined so that we know to use the localhost information
-if (mongoURL === undefined ) {
+if (mongoURL === undefined) {
   ip = '127.0.0.1'; // used IP instead of localhost because localhost did not work right on my local machine.
   port = 3000;
   mongoURLLabel = mongoURL = 'mongodb://localhost:27017/sampledb';
