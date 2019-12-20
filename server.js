@@ -5,6 +5,9 @@ var express = require('express'),
 // Not sure that this is need as the app seems to work without it
 // Object.assign=require('object-assign')
 
+var os = require("os");
+console.log(`os.hostname = ${os.hostname()}`);
+
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
     mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
