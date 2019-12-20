@@ -12,6 +12,7 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
 if (mongoURL == null) {
   var mongoHost, mongoPort, mongoDatabase, mongoPassword, mongoUser;
   // Using env vars via service discovery for the Mongo database information
+  console.log(`Service Name from env var: ${process.env.DATABASE_SERVICE_NAME}`)
   if (process.env.DATABASE_SERVICE_NAME) {
     var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase();
     mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'];
@@ -206,4 +207,4 @@ app.delete('/mySitesByUser/:brand/:userId', (req, res) => {
 app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
 
-//module.exports = app ;
+module.exports = app ;
