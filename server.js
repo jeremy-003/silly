@@ -2,7 +2,7 @@
 var express = require('express'),
     app     = express();
 
-//
+// Environment-specific values
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
     mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
@@ -38,8 +38,8 @@ if (mongoURL === undefined) {
   mongoURLLabel = mongoURL = 'mongodb://localhost:27017/sampledb';
 }
 
-//
-//
+// Mongois a document-based database
+// Connect to the db
 var db = null,
     dbDetails = new Object();
 
@@ -201,9 +201,9 @@ app.delete('/mySitesByUser/:brand/:userId', (req, res) => {
       }
 })});
 
-//
+// Spin up
 app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
 
-//
+// This is required, if removed the app will give an error
 module.exports = app ;
