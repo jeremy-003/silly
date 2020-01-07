@@ -1,7 +1,8 @@
 // Express handles routing and other middleware
 var express = require('express'),
     app     = express();
-    
+
+//
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
     mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
@@ -37,6 +38,8 @@ if (mongoURL === undefined) {
   mongoURLLabel = mongoURL = 'mongodb://localhost:27017/sampledb';
 }
 
+//
+//
 var db = null,
     dbDetails = new Object();
 
@@ -91,9 +94,9 @@ function isValidPartialMySite(inMySite) {
 ///////Endpoints///////
 ///////////////////////
 
+//
 app.get('/', function (req, res) {
-  // try to initialize the db on every request if it's not already
-  // initialized.
+  // Make sure that the URL is working for calls
   res.status(200).json({ message: "Working" });
 });
 
@@ -108,7 +111,6 @@ initDb(function(err){
 });
 
 // New code from sherlock into the example
-//
 // POST - MySite
 app.post('/mySites', (req, res) => {
   if (!isValidFullMySite(req.body)) {
@@ -198,10 +200,10 @@ app.delete('/mySitesByUser/:brand/:userId', (req, res) => {
           res.json(results);
       }
 })});
-//
-//
 
+//
 app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
 
+//
 module.exports = app ;

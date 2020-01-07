@@ -544,7 +544,7 @@
       "name": "DATABASE_NAME",
       "displayName": "Database Name",
       "required": true,
-      "value": "sherlock"
+      "value": "sherlockdb"
     },
     {
       "name": "DATABASE_ADMIN_PASSWORD",

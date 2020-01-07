@@ -10,5 +10,5 @@ oc new-app https://github.com/jeremy-003/silly
 # now create the pipeline build controller from the openshift/pipeline
 # subdirectory
 oc new-app https://github.com/jeremy-003/silly \
-  --context-dir=openshift/pipeline --name nodejs-ex-pipeline
+  --context-dir=openshift/pipeline --name silly
 ```
